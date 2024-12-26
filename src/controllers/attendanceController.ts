@@ -2,6 +2,7 @@ import { Context } from 'telegraf';
 import { initializeDatabase } from '../database';
 
 export const markAttendance = async (ctx: Context, status: 'present' | 'absent') => {
+  console.log(`markAttendance called with status: ${status}`);
   if (!ctx.from) {
     ctx.reply('User information not available.');
     return;
@@ -27,6 +28,7 @@ export const markPresent = (ctx: Context) => markAttendance(ctx, 'present');
 export const markAbsent = (ctx: Context) => markAttendance(ctx, 'absent');
 
 export const getTodayAttendanceStatus = async (ctx: Context) => {
+  console.log('getTodayAttendanceStatus called');
   if (!ctx.from) {
     ctx.reply('User information not available.');
     return;
@@ -46,6 +48,7 @@ export const getTodayAttendanceStatus = async (ctx: Context) => {
 };
 
 export const getAttendance = async (ctx: Context) => {
+  console.log('getAttendance called');
   if (!ctx.from) {
     ctx.reply('User information not available.');
     return;
