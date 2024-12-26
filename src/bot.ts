@@ -1,3 +1,7 @@
+// filepath: /c:/Users/hp/Ayush/Code/Web Dev/Projects/telegram-attendance-bot/src/bot.ts
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { Telegraf, Markup } from 'telegraf';
 import { setupRoutes } from './routes';
 
