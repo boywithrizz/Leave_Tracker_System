@@ -1,7 +1,7 @@
 import { Telegraf } from 'telegraf';
 import { setupRoutes } from './routes';
 
-const bot = new Telegraf('7274383239:AAGTONsMjxvgwRAkeR9pk-940BYuX2zm-rY');
+const bot = new Telegraf(process.env.BOT_TOKEN!);
 
 bot.start((ctx) => ctx.reply('Welcome! This bot will help you track attendance.'));
 bot.help((ctx) => ctx.reply('Send /start to start the bot.'));
