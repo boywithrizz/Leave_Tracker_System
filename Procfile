@@ -1,1 +1,1 @@
-worker: npx ts-node src/bot.ts
+worker: npm ci --omit=dev && npm run build && npm start
