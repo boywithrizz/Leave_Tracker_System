@@ -20,6 +20,7 @@ export const markAttendance = async (ctx: Context, status: 'present' | 'absent')
     );
     ctx.reply(`Attendance marked as ${status} for today.`);
   } catch (error: any) {
+    console.error('Error marking attendance:', error);
     ctx.reply('An error occurred while marking attendance.');
   }
 };
