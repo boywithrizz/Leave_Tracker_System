@@ -1,8 +1,7 @@
-// filepath: /c:/Users/hp/Ayush/Code/Web Dev/Projects/telegram-attendance-bot/src/bot.ts
 import { Telegraf } from 'telegraf';
 import { setupRoutes } from './routes';
 
-const bot = new Telegraf(process.env.BOT_TOKEN!);
+const bot = new Telegraf('7274383239:AAGTONsMjxvgwRAkeR9pk-940BYuX2zm-rY');
 
 bot.start((ctx) => ctx.reply('Welcome! This bot will help you track attendance.'));
 bot.help((ctx) => ctx.reply('Send /start to start the bot.'));
