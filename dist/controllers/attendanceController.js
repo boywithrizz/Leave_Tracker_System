@@ -13,12 +13,12 @@ exports.getAttendance = exports.getTodayAttendanceStatus = exports.markAbsent = 
 const database_1 = require("../database");
 const markAttendance = (ctx, status) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(`markAttendance called with status: ${status}`);
-    if (!ctx.from) {
+    if (!ctx.from || !ctx.session.user) {
         ctx.reply('User information not available.');
         return;
     }
     const db = yield (0, database_1.initializeDatabase)();
-    const userId = ctx.from.id.toString();
+    const userId = ctx.session.user.user_id;
     const date = new Date().toISOString().split('T')[0];
     try {
         yield db.collection('attendance').updateOne({ user_id: userId, date }, { $set: { status } }, { upsert: true });
@@ -36,12 +36,12 @@ const markAbsent = (ctx) => (0, exports.markAttendance)(ctx, 'absent');
 exports.markAbsent = markAbsent;
 const getTodayAttendanceStatus = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('getTodayAttendanceStatus called');
-    if (!ctx.from) {
+    if (!ctx.from || !ctx.session.user) {
         ctx.reply('User information not available.');
         return;
     }
     const db = yield (0, database_1.initializeDatabase)();
-    const userId = ctx.from.id.toString();
+    const userId = ctx.session.user.user_id;
     const date = new Date().toISOString().split('T')[0];
     const record = yield db.collection('attendance').findOne({ user_id: userId, date });
     if (!record) {
@@ -54,12 +54,12 @@ const getTodayAttendanceStatus = (ctx) => __awaiter(void 0, void 0, void 0, func
 exports.getTodayAttendanceStatus = getTodayAttendanceStatus;
 const getAttendance = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('getAttendance called');
-    if (!ctx.from) {
+    if (!ctx.from || !ctx.session.user) {
         ctx.reply('User information not available.');
         return;
     }
     const db = yield (0, database_1.initializeDatabase)();
-    const userId = ctx.from.id.toString();
+    const userId = ctx.session.user.user_id;
     const records = yield db.collection('attendance').find({ user_id: userId }).toArray();
     if (records.length === 0) {
         ctx.reply('No attendance records found.');

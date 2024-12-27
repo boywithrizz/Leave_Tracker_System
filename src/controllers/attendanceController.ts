@@ -1,15 +1,21 @@
 import { Context } from 'telegraf';
 import { initializeDatabase } from '../database';
 
-export const markAttendance = async (ctx: Context, status: 'present' | 'absent') => {
+interface SessionContext extends Context {
+  session: {
+    user?: any;
+  };
+}
+
+export const markAttendance = async (ctx: SessionContext, status: 'present' | 'absent') => {
   console.log(`markAttendance called with status: ${status}`);
-  if (!ctx.from) {
+  if (!ctx.from || !ctx.session.user) {
     ctx.reply('User information not available.');
     return;
   }
 
   const db = await initializeDatabase();
-  const userId = ctx.from.id.toString();
+  const userId = ctx.session.user.user_id;
   const date = new Date().toISOString().split('T')[0];
 
   try {
@@ -25,18 +31,18 @@ export const markAttendance = async (ctx: Context, status: 'present' | 'absent')
   }
 };
 
-export const markPresent = (ctx: Context) => markAttendance(ctx, 'present');
-export const markAbsent = (ctx: Context) => markAttendance(ctx, 'absent');
+export const markPresent = (ctx: SessionContext) => markAttendance(ctx, 'present');
+export const markAbsent = (ctx: SessionContext) => markAttendance(ctx, 'absent');
 
-export const getTodayAttendanceStatus = async (ctx: Context) => {
+export const getTodayAttendanceStatus = async (ctx: SessionContext) => {
   console.log('getTodayAttendanceStatus called');
-  if (!ctx.from) {
+  if (!ctx.from || !ctx.session.user) {
     ctx.reply('User information not available.');
     return;
   }
 
   const db = await initializeDatabase();
-  const userId = ctx.from.id.toString();
+  const userId = ctx.session.user.user_id;
   const date = new Date().toISOString().split('T')[0];
 
   const record = await db.collection('attendance').findOne({ user_id: userId, date });
@@ -48,15 +54,15 @@ export const getTodayAttendanceStatus = async (ctx: Context) => {
   }
 };
 
-export const getAttendance = async (ctx: Context) => {
+export const getAttendance = async (ctx: SessionContext) => {
   console.log('getAttendance called');
-  if (!ctx.from) {
+  if (!ctx.from || !ctx.session.user) {
     ctx.reply('User information not available.');
     return;
   }
 
   const db = await initializeDatabase();
-  const userId = ctx.from.id.toString();
+  const userId = ctx.session.user.user_id;
 
   const records = await db.collection('attendance').find({ user_id: userId }).toArray();
 
