@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setupDailyReminder = void 0;
 const database_1 = require("../database");
+// Function to set up daily reminders
 const setupDailyReminder = (bot) => {
     const cron = require('node-cron');
     cron.schedule('30 15 * * *', () => __awaiter(void 0, void 0, void 0, function* () {

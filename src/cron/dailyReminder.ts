@@ -7,6 +7,7 @@ interface SessionContext extends Context {
   };
 }
 
+// Function to set up daily reminders
 export const setupDailyReminder = (bot: Telegraf<SessionContext>) => {
   const cron = require('node-cron');
 

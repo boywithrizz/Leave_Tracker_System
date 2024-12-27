@@ -7,6 +7,7 @@ interface SessionContext extends Context {
   };
 }
 
+// Function to mark attendance
 export const markAttendance = async (ctx: SessionContext, status: 'present' | 'absent') => {
   console.log(`markAttendance called with status: ${status}`);
   if (!ctx.from || !ctx.session.user) {
@@ -31,9 +32,13 @@ export const markAttendance = async (ctx: SessionContext, status: 'present' | 'a
   }
 };
 
+// Function to mark present
 export const markPresent = (ctx: SessionContext) => markAttendance(ctx, 'present');
+
+// Function to mark absent
 export const markAbsent = (ctx: SessionContext) => markAttendance(ctx, 'absent');
 
+// Function to get today's attendance status
 export const getTodayAttendanceStatus = async (ctx: SessionContext) => {
   console.log('getTodayAttendanceStatus called');
   if (!ctx.from || !ctx.session.user) {
@@ -54,6 +59,7 @@ export const getTodayAttendanceStatus = async (ctx: SessionContext) => {
   }
 };
 
+// Function to get attendance records
 export const getAttendance = async (ctx: SessionContext) => {
   console.log('getAttendance called');
   if (!ctx.from || !ctx.session.user) {

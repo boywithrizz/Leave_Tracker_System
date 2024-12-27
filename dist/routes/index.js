@@ -44,12 +44,22 @@ const setupRoutes = (bot) => {
         console.log('set_schedule command triggered');
         (0, scheduleController_1.setSchedule)(ctx);
     });
-    bot.command('help', (ctx) => {
+    bot.action('help', (ctx) => {
         ctx.reply('Help Information:\n' +
             '/signup <username> <password> - Sign up for a new account\n' +
             '/signin <username> <password> - Sign in to your account\n' +
             '/set_schedule <schedule> - Set your weekly class schedule\n' +
             '/commands - List all available commands\n' +
+            '/start - Start the bot and display the menu\n\n' +
+            'Created by - Ayush Yadav\n' +
+            'Email - beatscupltors@gmail.com');
+    });
+    bot.action('commands', (ctx) => {
+        ctx.reply('Available commands:\n' +
+            '/signup <username> <password> - Sign up for a new account\n' +
+            '/signin <username> <password> - Sign in to your account\n' +
+            '/set_schedule <schedule> - Set your weekly class schedule\n' +
+            '/help - Get help information\n' +
             '/start - Start the bot and display the menu');
     });
 };

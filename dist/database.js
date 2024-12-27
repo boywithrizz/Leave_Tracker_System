@@ -15,8 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.initializeDatabase = void 0;
 const mongodb_1 = require("mongodb");
 const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
+dotenv_1.default.config(); // Load environment variables from .env file
 let db;
+// Function to initialize the database connection
 const initializeDatabase = () => __awaiter(void 0, void 0, void 0, function* () {
     if (!db) {
         const client = new mongodb_1.MongoClient(process.env.MONGODB_URI, {
@@ -24,7 +25,16 @@ const initializeDatabase = () => __awaiter(void 0, void 0, void 0, function* () 
         });
         yield client.connect();
         db = client.db('attendance_db'); // Replace with your database name
-        yield db.collection('attendance').createIndex({ user_id: 1, date: 1 }, { unique: true });
+        try {
+            yield db.collection('attendance').createIndex({ user_id: 1, date: 1 }, { unique: true });
+            yield db.collection('users').createIndex({ user_id: 1 }, { unique: true });
+            yield db.collection('schedule').createIndex({ user_id: 1 }, { unique: true });
+        }
+        catch (error) {
+            if (error.code !== 11000) { // Ignore duplicate key error
+                console.error('Error creating indexes:', error);
+            }
+        }
     }
     return db;
 });

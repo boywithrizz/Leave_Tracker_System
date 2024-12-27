@@ -8,6 +8,7 @@ interface SessionContext extends Context {
 
 const sessions: { [key: string]: any } = {};
 
+// Middleware to manage user sessions
 export const sessionMiddleware: MiddlewareFn<SessionContext> = (ctx, next) => {
   const userId = ctx.from?.id.toString();
   if (userId) {

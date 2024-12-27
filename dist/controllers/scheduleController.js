@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setSchedule = void 0;
 const database_1 = require("../database");
+// Function to set the weekly class schedule
 const setSchedule = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     if (!('text' in ctx.message)) {
         ctx.reply('Invalid message format.');

@@ -7,6 +7,7 @@ interface SessionContext extends Context {
   };
 }
 
+// Function to set the weekly class schedule
 export const setSchedule = async (ctx: SessionContext) => {
   if (!('text' in ctx.message!)) {
     ctx.reply('Invalid message format.');

@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAttendance = exports.getTodayAttendanceStatus = exports.markAbsent = exports.markPresent = exports.markAttendance = void 0;
 const database_1 = require("../database");
+// Function to mark attendance
 const markAttendance = (ctx, status) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(`markAttendance called with status: ${status}`);
     if (!ctx.from || !ctx.session.user) {
@@ -30,10 +31,13 @@ const markAttendance = (ctx, status) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.markAttendance = markAttendance;
+// Function to mark present
 const markPresent = (ctx) => (0, exports.markAttendance)(ctx, 'present');
 exports.markPresent = markPresent;
+// Function to mark absent
 const markAbsent = (ctx) => (0, exports.markAttendance)(ctx, 'absent');
 exports.markAbsent = markAbsent;
+// Function to get today's attendance status
 const getTodayAttendanceStatus = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('getTodayAttendanceStatus called');
     if (!ctx.from || !ctx.session.user) {
@@ -52,6 +56,7 @@ const getTodayAttendanceStatus = (ctx) => __awaiter(void 0, void 0, void 0, func
     }
 });
 exports.getTodayAttendanceStatus = getTodayAttendanceStatus;
+// Function to get attendance records
 const getAttendance = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('getAttendance called');
     if (!ctx.from || !ctx.session.user) {
