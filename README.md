@@ -54,4 +54,7 @@ telegram-attendance-bot
 
 ## Contributing
 
-Feel free to submit issues or pull requests to improve the bot's functionality.
+This project is under development and is not fully functional. <br>
+Till yet the commumication between the telegram API, mongoDB, and server is ready displaying a simple message and basic attendance system, more functionalities will be added to make it a full fledged system. <br>
+Feel free to submit issues or pull requests to improve the bot's functionality.<br>
+For any query contact me at <a href="linkedin.com/in/ayush-yadav-ab0268324"> Linkedin </a>
